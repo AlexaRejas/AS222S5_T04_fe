@@ -1,29 +1,17 @@
-# Etapa 1: Construcción
-FROM node:18 AS build
+FROM node:18
 
-# Crear el directorio de trabajo
+RUN mkdir -p /app
+
 WORKDIR /app
 
-# Copiar archivos necesarios para instalar dependencias
-COPY package*.json ./
+COPY package*.json /app
 
-# Instalar dependencias
 RUN npm install
 
-# Copiar el resto del código fuente
-COPY . ./
+COPY . /app
 
-# Construir la aplicación en modo producción
 RUN npm run build --prod
 
-# Etapa 2: Producción
-FROM nginx:alpine AS production
+EXPOSE 4200
 
-# Copiar los archivos construidos a la carpeta de NGINX
-COPY --from=build /app/dist/tu-proyecto /usr/share/nginx/html
-
-# Exponer el puerto para NGINX
-EXPOSE 80
-
-# Iniciar NGINX
-CMD ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["npm", "start"]
