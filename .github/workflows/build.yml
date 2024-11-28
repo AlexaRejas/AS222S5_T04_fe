@@ -3,8 +3,6 @@ on:
   push:
     branches:
       - develop
-  pull_request:
-    types: [opened, synchronize, reopened]
 jobs:
   sonarcloud:
     name: SonarQube Cloud
@@ -24,7 +22,7 @@ jobs:
         run: echo ${{ secrets.DOCKER_HUB_TOKEN }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
   
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/ejemplo:latest .
+        run: docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/hub:latest .
   
       - name: Push Docker image to Docker Hub
-        run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/ejemplo:latest
+        run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/hub:latest
