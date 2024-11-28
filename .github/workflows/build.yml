@@ -1,4 +1,4 @@
-name: Sonart
+name: SonartCloud
 on:
   push:
     branches:
