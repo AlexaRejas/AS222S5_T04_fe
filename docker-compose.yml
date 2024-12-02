@@ -1,0 +1,18 @@
+version: '3'
+services:
+  frondend:
+    image: rejas281/frondend:latest
+    ports:
+      - "8080:8080"
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      API_KEY: ${API_KEY}
+  frondend2:
+    image: rejas281/frondend2:latest
+    container_name: frondend2
+    ports:
+      - "4200:4200"
+    environment:
+      BACKEND_URL: ${BACKEND_URL}
